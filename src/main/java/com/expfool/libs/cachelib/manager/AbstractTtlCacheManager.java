@@ -1,17 +1,17 @@
-package ru.promo.teamspace.cachelib.manager;
+package com.expfool.libs.cachelib.manager;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ru.promo.teamspace.cachelib.adapter.TtlCacheAdapter;
-import ru.promo.teamspace.cachelib.configuration.property.CacheProperties;
-import ru.promo.teamspace.cachelib.manager.key.CacheKeyManager;
+import com.expfool.libs.cachelib.adapter.TtlCacheAdapter;
+import com.expfool.libs.cachelib.configuration.property.CacheProperties;
+import com.expfool.libs.cachelib.manager.key.CacheKeyManager;
 
 import java.time.Duration;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 import static java.util.Objects.isNull;
-import static ru.promo.teamspace.cachelib.ExceptionUtils.cachePropertiesNotFound;
+import static com.expfool.libs.cachelib.ExceptionUtils.cachePropertiesNotFound;
 
 @Slf4j
 @RequiredArgsConstructor

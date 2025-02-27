@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib.adapter;
+package com.expfool.libs.cachelib.adapter;
 
 import java.time.Duration;
 

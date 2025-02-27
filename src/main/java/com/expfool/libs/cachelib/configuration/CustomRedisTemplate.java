@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib.configuration;
+package com.expfool.libs.cachelib.configuration;
 
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;

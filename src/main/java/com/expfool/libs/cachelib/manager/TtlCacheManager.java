@@ -1,8 +1,8 @@
-package ru.promo.teamspace.cachelib.manager;
+package com.expfool.libs.cachelib.manager;
 
-import ru.promo.teamspace.cachelib.adapter.TtlCacheAdapter;
-import ru.promo.teamspace.cachelib.configuration.property.CacheProperties;
-import ru.promo.teamspace.cachelib.manager.key.CacheKeyManager;
+import com.expfool.libs.cachelib.adapter.TtlCacheAdapter;
+import com.expfool.libs.cachelib.configuration.property.CacheProperties;
+import com.expfool.libs.cachelib.manager.key.CacheKeyManager;
 
 public class TtlCacheManager<T> extends AbstractTtlCacheManager<String, T> {
 

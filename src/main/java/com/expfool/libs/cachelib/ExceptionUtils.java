@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib;
+package com.expfool.libs.cachelib;
 
 import jakarta.el.PropertyNotFoundException;
 

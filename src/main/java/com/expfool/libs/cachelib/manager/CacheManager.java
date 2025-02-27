@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib.manager;
+package com.expfool.libs.cachelib.manager;
 
 import java.util.Optional;
 import java.util.function.Supplier;

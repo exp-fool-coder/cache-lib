@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib.adapter;
+package com.expfool.libs.cachelib.adapter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

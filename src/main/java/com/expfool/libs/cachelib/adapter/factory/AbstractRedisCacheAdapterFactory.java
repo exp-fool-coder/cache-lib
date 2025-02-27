@@ -1,7 +1,7 @@
-package ru.promo.teamspace.cachelib.adapter.factory;
+package com.expfool.libs.cachelib.adapter.factory;
 
 import org.springframework.data.redis.core.RedisTemplate;
-import ru.promo.teamspace.cachelib.adapter.CacheAdapter;
+import com.expfool.libs.cachelib.adapter.CacheAdapter;
 
 public abstract class AbstractRedisCacheAdapterFactory<K, V> implements CacheAdapterFactory<K, V> {
 

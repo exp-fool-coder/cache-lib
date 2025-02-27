@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib.manager.key;
+package com.expfool.libs.cachelib.manager.key;
 
 public interface CacheKeyManager<T> {
 

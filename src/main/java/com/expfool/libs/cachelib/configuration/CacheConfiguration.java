@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib.configuration;
+package com.expfool.libs.cachelib.configuration;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -7,9 +7,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
-import ru.promo.teamspace.cachelib.configuration.property.CacheProperties;
-import ru.promo.teamspace.cachelib.manager.key.BaseStringCacheKeyManager;
-import ru.promo.teamspace.cachelib.manager.key.CacheKeyManager;
+import com.expfool.libs.cachelib.configuration.property.CacheProperties;
+import com.expfool.libs.cachelib.manager.key.BaseStringCacheKeyManager;
+import com.expfool.libs.cachelib.manager.key.CacheKeyManager;
 
 @Data
 @Validated

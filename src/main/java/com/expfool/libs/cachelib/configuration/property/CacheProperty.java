@@ -1,4 +1,4 @@
-package ru.promo.teamspace.cachelib.configuration.property;
+package com.expfool.libs.cachelib.configuration.property;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
