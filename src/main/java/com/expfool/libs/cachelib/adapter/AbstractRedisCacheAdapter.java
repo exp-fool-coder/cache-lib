@@ -4,31 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.time.Duration;
-import java.util.Optional;
 
 import static java.util.Objects.isNull;
-import static java.util.Optional.empty;
-import static java.util.Optional.ofNullable;
 
 @Slf4j
-public abstract class AbstractRedisCacheAdapter<V> implements TtlCacheAdapter<String, V> {
-
-    private final RedisTemplate<String, V> redisTemplate;
+public abstract class AbstractRedisCacheAdapter<V> extends AbstractRedisReadonlyCacheAdapter<V> implements TtlCacheAdapter<String, V> {
 
     public AbstractRedisCacheAdapter(RedisTemplate<String, V> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-        this.redisTemplate.afterPropertiesSet();
-    }
-
-    @Override
-    public Optional<V> get(String key) {
-        try {
-            var data = redisTemplate.opsForValue().get(key);
-            return ofNullable(data);
-        } catch (Exception exception) {
-            log.error("Error while getting cached data from redis", exception);
-            return empty();
-        }
+        super(redisTemplate);
     }
 
     @Override

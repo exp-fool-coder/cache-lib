@@ -1,7 +1,7 @@
 # cache-lib
 
-Содержит в себе набор интерфейсов и их реализаций для быстрого подключение кэша.
-
+ Содержит в себе набор интерфейсов и их реализаций для быстрого подключение кэша.
+ 
 ## Структура
 
 ### Интерфейсы
@@ -11,15 +11,15 @@
 Набор интерфейсов для не посредственного взаимодействия с хранилищем кэша
 
 - `ReadonlyCacheAdapter<K, V>`
-    - `Optional<V> get(K key)`
-    - `List<V> get(Collection<K> keys)`
+  - `Optional<V> get(K key)`
+  - `List<V> get(Collection<K> keys)`
 - `CacheAdapter<K, V>`
-    - Все методы `ReadonlyCacheAdapter<K, V>`
-    - `void put(K key, V value)`
-    - `void remove(K key)`
+  - Все методы `ReadonlyCacheAdapter<K, V>`
+  - `void put(K key, V value)`
+  - `void remove(K key)`
 - `TtlCacheAdapter<K, V>`
-    - Все методы `CacheAdapter<K, V>`
-    - `void put(K key, V value, Duration ttl)`
+  - Все методы `CacheAdapter<K, V>`
+  - `void put(K key, V value, Duration ttl)`
 
 ##### Абстрактные реализации адаптеров для Redis
 
@@ -27,49 +27,49 @@
 
 - `AbstractRedisReadonlyCacheAdapter<V>`
 
-  Реализует интерфейс `ReadonlyCacheAdapter<String, V>`в
+    Реализует интерфейс `ReadonlyCacheAdapter<String, V>`в 
+    
+    Содержит в себе private поле `RedisTemplate<String, V> redisTemplate`
 
-  Содержит в себе private поле `RedisTemplate<String, V> redisTemplate`
-
-  Конструктор: `AbstractRedisReadonlyCacheAdapter(RedisTemplate<String, V> redisTemplate)`
+    Конструктор: `AbstractRedisReadonlyCacheAdapter(RedisTemplate<String, V> redisTemplate)`
 - `AbstractRedisCacheAdapter<V>`
-
-  Наследует `AbstractRedisReadonlyCacheAdapter<V>` и реализует интерфейс `TtlCacheAdapter<String, V>`
-
-  Конструктор: `AbstractRedisCacheAdapter(RedisTemplate<String, V> redisTemplate)`
+  
+    Наследует `AbstractRedisReadonlyCacheAdapter<V>` и реализует интерфейс `TtlCacheAdapter<String, V>`
+    
+    Конструктор: `AbstractRedisCacheAdapter(RedisTemplate<String, V> redisTemplate)`
 
 ##### Реализации адаптеров
 - `StringKeyRedisReadonlyAdapter<V>`
-
-  Наследует `AbstractRedisReadonlyCacheAdapter<V>`
-
-  Конструктор `StringKeyRedisReadonlyAdapter(RedisTemplate<String, V> redisTemplate)`
+    
+    Наследует `AbstractRedisReadonlyCacheAdapter<V>`
+    
+    Конструктор `StringKeyRedisReadonlyAdapter(RedisTemplate<String, V> redisTemplate)`
 - `StringKeyRedisAdapter<V>`
 
-  Наследует `AbstractRedisCacheAdapter<V>`
+    Наследует `AbstractRedisCacheAdapter<V>`
 
-  Конструктор `StringKeyRedisAdapter(RedisTemplate<String, V> redisTemplate)`
+    Конструктор `StringKeyRedisAdapter(RedisTemplate<String, V> redisTemplate)`
 
 #### Менеджеры ключей
 
 ##### Интерефейсы
 - `CacheKeyManager<T>`
-    - `T getCacheKey(String cacheGroup, T keySuffix)`
+  - `T getCacheKey(String cacheGroup, T keySuffix)`
 ##### Реализации
 - `BaseStringCacheKeyManager`
+    
+    Реализует `CacheKeyManager<String>`
+  
+    Конструктор `BaseStringCacheKeyManager(CacheProperties cacheProperties, String applicationName)`
 
-  Реализует `CacheKeyManager<String>`
-
-  Конструктор `BaseStringCacheKeyManager(CacheProperties cacheProperties, String applicationName)`
-
-  Использует application properties для получения данных для составления строки ключа
+    Использует application properties для получения данных для составления строки ключа
 - `GlobalStringCacheKeyManager`
 
-  Реализует `CacheKeyManager<String>`
+    Реализует `CacheKeyManager<String>`
+    
+    Имеет пустой конструктор. 
 
-  Имеет пустой конструктор.
-
-  Cоставляет ключ простой конкатенацией `cacheGroup + "." + keyPrefix`.
+    Cоставляет ключ простой конкатенацией `cacheGroup + "." + keyPrefix`.
 
 #### Менеджер TTL
 ##### Интерфейсы
@@ -79,50 +79,50 @@
 
 - `BaseCacheTtlManager`
 
-  Реализует `CacheTtlManager`
+    Реализует `CacheTtlManager`
 
-  Конструктор `BaseCacheTtlManager(CacheProperties cacheProperties)`
-
-  Достаёт данные о длительности жизни кэша из application properties на основе `cacheName`
+    Конструктор `BaseCacheTtlManager(CacheProperties cacheProperties)`
+    
+    Достаёт данные о длительности жизни кэша из application properties на основе `cacheName` 
 
 #### Менеджеры кэша
 Основные интерфейсы для работы с кэшом:
-- `ReadonlyCacheManager<K, V>`
-    - `Optional<V> get(K key)`
-    - `List<V> get(Collection<K> keys)`
-- `CacheManager<K, V>`
-    - Все методы `ReadonlyCacheManager<K, V>`
-    - `Optional<V> get(K key, Supplier<V> supplier)`
-    - `void put(K key, V value)`
-    - `void remove(K key)`
-
+ - `ReadonlyCacheManager<K, V>`
+   - `Optional<V> get(K key)`
+   - `List<V> get(Collection<K> keys)`
+ - `CacheManager<K, V>`
+   - Все методы `ReadonlyCacheManager<K, V>`
+   - `Optional<V> get(K key, Supplier<V> supplier)`
+   - `void put(K key, V value)`
+   - `void remove(K key)`
+ 
 ##### Абстрактные реализации менеджеров для Redis
 
 Данные реализации используют адаптеры для взаимодействия с хранилищем кэша.
 
 - `AbstractReadOnlyCacheManager<K, V>`
+  
+    Реализует `ReadonlyCacheManager<K, V>`
 
-  Реализует `ReadonlyCacheManager<K, V>`
+    Конструктор `AbstractReadOnlyCacheManager(ReadonlyCacheAdapter<K, V> adapter, CacheKeyManager<K> keyManager, String cacheName)`
 
-  Конструктор `AbstractReadOnlyCacheManager(ReadonlyCacheAdapter<K, V> adapter, CacheKeyManager<K> keyManager, String cacheName)`
+    Реализует взаимодействие с кэшом используя `ReadonlyCacheAdapter<K, V>`
 
-  Реализует взаимодействие с кэшом используя `ReadonlyCacheAdapter<K, V>`
+    Формирует ключи с помощью `CacheKeyManager<K>`
 
-  Формирует ключи с помощью `CacheKeyManager<K>`
-
-  Также при создании экземпляра надо указать имя кэша
+    Также при создании экземпляра надо указать имя кэша
 
 -  `AbstractTtlCacheManager<K, V> `
 
-   Реализует `CacheManager<K, V>`
+    Реализует `CacheManager<K, V>`
 
-   Конструктор `AbstractTtlCacheManager(TtlCacheAdapter<K, V> cacheAdapter, CacheKeyManager<K> keyManager, CacheTtlManager ttlManager, String cacheName)`
+    Конструктор `AbstractTtlCacheManager(TtlCacheAdapter<K, V> cacheAdapter, CacheKeyManager<K> keyManager, CacheTtlManager ttlManager, String cacheName)`
 
-   Реализует взаимодействие кэшом используя `TtlCacheAdapter<K, V>`
+    Реализует взаимодействие кэшом используя `TtlCacheAdapter<K, V>`
 
-   Формирует ключи с помощью `CacheKeyManager<K>`
+    Формирует ключи с помощью `CacheKeyManager<K>`
 
-   Получает данные о длительности жизни кэша с помощью `CacheTtlManager`
+    Получает данные о длительности жизни кэша с помощью `CacheTtlManager`
 
    Также при создании экземпляра надо указать имя кэша
 
@@ -130,16 +130,16 @@
 
 - `ReadonlyCacheManagerImpl<K, V>`
 
-  Реализует `AbstractReadOnlyCacheManager<K, V>`
+    Реализует `AbstractReadOnlyCacheManager<K, V>`
 
-  Конструктор `ReadonlyCacheManagerImpl(ReadonlyCacheAdapter<K, V> adapter, CacheKeyManager<K> keyManager, String cacheName)`
+    Конструктор `ReadonlyCacheManagerImpl(ReadonlyCacheAdapter<K, V> adapter, CacheKeyManager<K> keyManager, String cacheName)`
 
 - `TtlCacheManager<T>`
 
-  Реализует `AbstractTtlCacheManager<String, T>`
+    Реализует `AbstractTtlCacheManager<String, T>`
 
-  Конструктор `ReadonlyCacheManagerImpl(ReadonlyCacheAdapter<K, V> adapter, CacheKeyManager<K> keyManager, String cacheName)`
-
+    Конструктор `ReadonlyCacheManagerImpl(ReadonlyCacheAdapter<K, V> adapter, CacheKeyManager<K> keyManager, String cacheName)`
+    
 ### Структура properties
 
 Все переменные окружения хранятся в бине CacheProperties
@@ -147,14 +147,14 @@
 Префикс всех пропертей `cacher`
 
 - `CacheProperies`
-    - `cachePrefix` Строковый префикс для всех кэшей использующих `BaseStringCacheKeyManager`. Обязателен для указания.
-    - `cache`
-
-      тип `Map<String, CacheProperty>`
-
-        - `CachePropery`
-            - `Duration ttl` длительность жизни кэша использующих `BaseCacheTtlManager`
-            - `String keyPrefix` префикс конкретного кэш менеджера использующего `BaseStringCacheKeyManager`
+  - `cachePrefix` Строковый префикс для всех кэшей использующих `BaseStringCacheKeyManager`. Обязателен для указания.
+  - `cache`
+    
+    тип `Map<String, CacheProperty>`
+        
+    - `CachePropery`
+      - `Duration ttl` длительность жизни кэша использующих `BaseCacheTtlManager`
+      - `String keyPrefix` префикс конкретного кэш менеджера использующего `BaseStringCacheKeyManager`
 
 #### Пример (для application.yml)
 ```yaml
@@ -170,7 +170,7 @@ cacher:
 ```
 
 ### Полезные штуки
-
+    
 Имеется класс для более простого создания `RedisTemplate<K,V>`
 
      CustomRedisTemplate(
@@ -204,9 +204,9 @@ cacher:
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import ru.promo.teamspace.cachelib.adapter.TtlCacheAdapter;
-import ru.promo.teamspace.cachelib.adapter.impl.StringKeyRedisAdapter;
-import ru.promo.teamspace.cachelib.configuration.CustomRedisTemplate;
+import adapter.com.expfool.libs.cachelib.TtlCacheAdapter;
+import impl.adapter.com.expfool.libs.cachelib.StringKeyRedisAdapter;
+import configuration.com.expfool.libs.cachelib.CustomRedisTemplate;
 
 @Configuration
 @RequiredArgsConstructor
@@ -230,7 +230,7 @@ public class RedisConfiguration {
 
     @Bean
 
-    public CacheManager<String, Project> projectTtlCacheManager(TtlCacheAdapter<String, OurObject> adapter, 
+    public CacheManager<String, Project> projectTtlCacheManager(TtlCacheAdapter<String, OurObject> adapter,
                                                                 CacheKeyManager<String> cacheKeyManager,
                                                                 CacheTtlManager cacheTtlManager) {
         return new TtlCacheManager<>(adapter, cacheKeyManager, cacheTtlManager, "some-object");

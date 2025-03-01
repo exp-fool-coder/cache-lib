@@ -1,8 +1,9 @@
-package com.expfool.libs.cachelib.manager.key;
+package com.expfool.libs.cachelib.manager.key.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.expfool.libs.cachelib.configuration.property.CacheProperties;
+import com.expfool.libs.cachelib.manager.key.CacheKeyManager;
 
 import static java.util.Objects.isNull;
 import static com.expfool.libs.cachelib.ExceptionUtils.cachePropertiesNotFound;
@@ -12,6 +13,7 @@ import static com.expfool.libs.cachelib.ExceptionUtils.cachePropertiesNotFound;
 public class BaseStringCacheKeyManager implements CacheKeyManager<String> {
 
     private final CacheProperties cacheProperties;
+    private final String applicationName;
 
     @Override
     public String getCacheKey(String cacheGroup, String keySuffix) {
@@ -22,6 +24,6 @@ public class BaseStringCacheKeyManager implements CacheKeyManager<String> {
         }
         var cacheName = cacheProperty.getKeyPrefix();
         var keyPrefix = cacheProperties.getCachePrefix();
-        return keyPrefix + "." + cacheName + "." + keySuffix;
+        return keyPrefix + "." + applicationName + "." + cacheName + "." + keySuffix;
     }
 }
